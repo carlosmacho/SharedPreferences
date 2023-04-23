@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SharedPreferences</string>
+    <string name="preference_file_key">ficheiro_sp</string>
+    <string name="sound">sound</string>
+    <string name="name">name</string>
+    <string name="age">age</string>
+</resources>
