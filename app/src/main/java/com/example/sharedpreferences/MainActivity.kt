@@ -18,13 +18,23 @@ class MainActivity : AppCompatActivity() {
 
         val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),
             Context.MODE_PRIVATE)
-        val soundValue = sharedPref.getBoolean(getString(R.string.sound), false)
-        val nameValue = sharedPref.getBoolean(getString(R.string.name), false)
-        val age = sharedPref.getBoolean(getString(R.string.age), false)
-        findViewById<EditText>(R.id.name).setText(nameValue.toString())
 
-        if (soundValue){
-            findViewById<CheckBox>(R.id.checkbox).isChecked = true
+        // Retrieve the name and age values from the shared preferences
+        val nameValue = sharedPref.getString(getString(R.string.name), "")
+        val ageValue = sharedPref.getString(getString(R.string.age), "")
+        Log.d("****SHAREDPREF", "Read $nameValue")
+        Log.d("****SHAREDPREF", "Read $ageValue")
+
+        // Set the name and age values to the corresponding EditText fields
+        findViewById<EditText>(R.id.name).setText(nameValue)
+        findViewById<EditText>(R.id.age).setText(ageValue)
+
+        // Retrieve the sound value from the shared preferences and set the checkbox accordingly
+        val soundValue = sharedPref.getBoolean(getString(R.string.sound), false)
+        Log.d("****SHAREDPREF", "Read $soundValue")
+
+        if(soundValue){
+            findViewById<CheckBox>(R.id.checkbox).isChecked = soundValue
         }
     }
 
@@ -36,21 +46,23 @@ class MainActivity : AppCompatActivity() {
                 putBoolean(getString(R.string.sound), view.isChecked)
                 commit()
             }
+            Log.d("****SHAREDPREF", "Changed to ${view.isChecked}")
+
         }
     }
 
     fun onClick(view: View) {
-        if (view is EditText) {
+        if (view is Button) {
             val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.preference_file_key),
                 Context.MODE_PRIVATE)
             with (sharedPref.edit()) {
-                val name = findViewById<EditText>(R.id.name).toString()
-                val age = findViewById<EditText>(R.id.age).toString()
-                putString(getString(R.string.name), name)
-                putString(getString(R.string.age), age)
-
+                putString(getString(R.string.name), findViewById<EditText>(R.id.name).text.toString())
+                putString(getString(R.string.age), findViewById<EditText>(R.id.age).text.toString())
                 commit()
             }
+            Log.d("****SHAREDPREF", "Changed to ${findViewById<EditText>(R.id.name).text.toString()}")
+            Log.d("****SHAREDPREF", "Changed to ${findViewById<EditText>(R.id.age).text.toString()}")
         }
     }
+
 }
