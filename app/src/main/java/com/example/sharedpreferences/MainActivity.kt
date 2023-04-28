@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
 
         if(nameValue != ""){
             val intent = Intent(this@MainActivity, HomeActivity::class.java)
-            startActivityForResult(intent, homeActivityRequestCode)
+            //startActivityForResult(intent, homeActivityRequestCode)
+            startActivity(intent)
         }
 
         val bt1 = findViewById<Button>(R.id.button1)
@@ -58,7 +59,9 @@ class MainActivity : AppCompatActivity() {
             }
             Log.d("****SHAREDPREF", "Changed to ${findViewById<EditText>(R.id.name).text.toString()}")
             val intent = Intent(this@MainActivity, HomeActivity::class.java)
-            startActivityForResult(intent, homeActivityRequestCode)
+            //startActivityForResult(intent, homeActivityRequestCode)
+            startActivity(intent)
+
         }
 
 
